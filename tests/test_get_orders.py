@@ -1,6 +1,7 @@
 import requests
 import allure
 from url import URL, GET_ORDERS, CREATE_ORDER
+from data import UNAUTHORIZED
 
 
 class TestGetOrdersUser:
@@ -31,7 +32,7 @@ class TestGetOrdersUser:
         with allure.step("Проверить ответ сервера"):
             assert response.status_code == 401
             assert response.json()['success'] is False
-            assert response.json()['message'] == 'You should be authorised'
+            assert response.json()['message'] == UNAUTHORIZED
 
         
 

@@ -2,6 +2,7 @@ import pytest
 import requests
 import allure
 from url import URL, LOGIN
+from data import WRONG_LOGIN
 
 
 class TestLogin:
@@ -33,7 +34,7 @@ class TestLogin:
         with allure.step("Проверить ответ сервера"):
             assert response.status_code == 401
             assert response.json()['success'] is False
-            assert response.json()['message'] == "email or password are incorrect" 
+            assert response.json()['message'] == WRONG_LOGIN
             
 
      

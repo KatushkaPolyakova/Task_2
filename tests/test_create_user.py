@@ -3,6 +3,7 @@ import requests
 import allure 
 from url import URL, CREATE_USER
 from helpers import generate_user
+from data import USER_ALREADY_EXISTS, REQUIRED_FIELDS
 
 
 class TestCreateUser:
@@ -23,7 +24,7 @@ class TestCreateUser:
         
         with allure.step("Проверить ответ сервера"):
             assert response.status_code == 403
-            assert response.json()['message'] == "User already exists" 
+            assert response.json()['message'] == USER_ALREADY_EXISTS
             assert response.json()['success'] is False
 
 
@@ -38,7 +39,7 @@ class TestCreateUser:
         
         with allure.step("Проверить ответ сервера"):
             assert response.status_code == 403
-            assert response.json()['message'] == "Email, password and name are required fields" 
+            assert response.json()['message'] == REQUIRED_FIELDS
             assert response.json()['success'] is False
 
      

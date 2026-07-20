@@ -1,6 +1,7 @@
 import requests
 import allure
 from url import URL, CREATE_ORDER
+from data import NO_INGREDIENTS
 
 
 class TestCreateOrder:
@@ -41,7 +42,7 @@ class TestCreateOrder:
         with allure.step("Проверить ответ сервера"):
             assert response.status_code == 400
             assert response.json()['success'] is False
-            assert response.json()['message'] == 'Ingredient ids must be provided'
+            assert response.json()['message'] == NO_INGREDIENTS
 
 
     @allure.title("Создание заказа с неверным хэшем ингредиентов")
