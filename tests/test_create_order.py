@@ -44,7 +44,7 @@ class TestCreateOrder:
             assert response.json()['message'] == 'Ingredient ids must be provided'
 
 
-    @allure.title(" Создание заказа с неверным хэшоем ингредиентов")
+    @allure.title("Создание заказа с неверным хэшем ингредиентов")
     def test_create_order_with_wrong_hash_ingredients_error(self, create_user):
         token = create_user['token']
         payload = {'ingredients': ['1111111111']}

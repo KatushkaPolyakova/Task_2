@@ -2,11 +2,12 @@ import pytest
 import requests
 import allure 
 from url import URL, CREATE_USER
+from helpers import generate_user
 
 
 class TestCreateUser:
 
-    @allure.title('Успешное создание уникального пользователя')
+    @allure.title("Успешное создание уникального пользователя")
     def test_create_unique_user_success(self, create_user):
         response = create_user['response']
         with allure.step("Проверить ответ сервера"):
@@ -28,11 +29,12 @@ class TestCreateUser:
 
     @pytest.mark.parametrize('field',['email', 'password', 'name'])
     @allure.title("Создание пользователя без обязательного поля")
-    def test_create_user_without_data_error(self, user_data, field):
-        del user_data[field]
+    def test_create_user_without_data_error(self, field):
+        user = generate_user()
+        del user[field]
 
         with allure.step("Отправить запрос на создание пользователя"):
-            response = requests.post(URL+CREATE_USER, json=user_data)
+            response = requests.post(URL+CREATE_USER, json=user)
         
         with allure.step("Проверить ответ сервера"):
             assert response.status_code == 403

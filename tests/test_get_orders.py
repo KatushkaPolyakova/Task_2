@@ -5,7 +5,7 @@ from url import URL, GET_ORDERS, CREATE_ORDER
 
 class TestGetOrdersUser:
 
-    @allure.title(" Получение заказов конкрентого пользователя")
+    @allure.title("Получение заказов конкрентого пользователя")
     def test_get_orders_after_auth_success(self, create_user, ingredients):
         token = create_user['token']
         payload = {'ingredients': ingredients}
@@ -22,7 +22,7 @@ class TestGetOrdersUser:
             assert response.json()['success'] is True
         
 
-    @allure.title(" Получение заказов неавторизованного пользователя")
+    @allure.title("Получение заказов неавторизованного пользователя")
     def test_get_orders_without_auth_error(self):
 
         with allure.step("Отправить запрос на получение заказов"):

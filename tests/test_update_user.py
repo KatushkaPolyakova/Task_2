@@ -4,7 +4,7 @@ import allure
 from url import URL, UPDATE_USER
 
 
-class TestUpdateUser:
+class TestUpdateUser: 
 
     @pytest.mark.parametrize('field, value', 
                              [
@@ -12,12 +12,12 @@ class TestUpdateUser:
                                  ('password', 'new_password'),
                                  ('name', 'new_name'),
                              ] )
-    @allure.title('Изменение данных авторизованного пользователя')
+    @allure.title("Изменение данных авторизованного пользователя")
     def test_update_after_auth_success(self, create_user, field, value):
         token = create_user['token']
         payload = {field:value}
 
-        with allure.step('Отправить запрос на измнение данных'):
+        with allure.step("Отправить запрос на измнение данных"):
             response = requests.patch(URL+UPDATE_USER, headers={'Authorization': token}, json=payload)
 
         with allure.step("Проверить ответ сервера"):
@@ -39,7 +39,7 @@ class TestUpdateUser:
     def test_update_user_without_auth_error(self, field, value):
         payload = {field:value}
         
-        with allure.step('Отправить запрос на измнение данных без авторизации'):
+        with allure.step("Отправить запрос на измнение данных без авторизации"):
             response = requests.patch(URL+UPDATE_USER, json=payload)
 
         with allure.step("Проверить ответ сервера"):

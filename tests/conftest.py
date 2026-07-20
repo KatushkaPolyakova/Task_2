@@ -5,16 +5,12 @@ from url import URL, CREATE_USER, UPDATE_USER, INGREDIENTS
 
 
 @pytest.fixture
-def user_data():
-    return generate_user()
-
-
-@pytest.fixture
-def create_user(user_data):
-    response = requests.post(URL+CREATE_USER, json=user_data)
+def create_user():
+    user = generate_user()
+    response = requests.post(URL+CREATE_USER, json=user)
     access_token = response.json()["accessToken"]
     yield {
-        'user': user_data,
+        'user': user,
         'response': response,
         'token': access_token
     }
